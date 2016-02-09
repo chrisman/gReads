@@ -4,6 +4,13 @@ var db = require('../lib/db/books');
 
 
 // CREATE -- add a book //
+router.get('/new', function(req, res, next){
+  db.getGenres(function(genres){
+    res.render('books/new',{
+      genres: genres
+    });
+  });
+});
 router.post('/', function(req, res, next) {
   res.send('book added');
 });

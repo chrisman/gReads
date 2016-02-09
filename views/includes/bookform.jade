@@ -1,0 +1,20 @@
+label(for="title") Title
+  p: input(type="text" placeholder="title" id="title" name="title")
+
+label(for="genre") Genre
+  p: select(id="genre" name="genre")
+    for g in genres
+      option(value='#{g.genre}') #{g.genre}
+
+label(for="url") Cover Image URL
+  p: input(placeholder="http://www" id="url" name="cover_url")
+
+label(for="description") Description
+  p: textarea(placeholder="description" id="description" name="description")
+
+label(for="authors") Authors
+  .authors
+    p: select(id="authors" name="authors" multiple="true" size="3")
+    button remove
+  select
+  button Add Author
