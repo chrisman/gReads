@@ -17,4 +17,6 @@ label(for="authors") Authors
     p: select(id="authors" name="authors" multiple="true" size="3")
     button remove
   select
+    for a in authors
+      option(value='#{a.id}') #{a.first_name} #{a.last_name}
   button Add Author
