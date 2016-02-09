@@ -3,4 +3,17 @@ extends ../contentlayout
 block page_content
   h2= title
   for b in books
-    li= b.title
+    .book_summary
+      .thumbnail
+        img(src='#{b.cover_url}' height='100')
+      .summary_header
+        .title_info
+          h3 #{b.title}
+          p By #{b.first_name} #{b.last_name}
+        .buttons
+          button edit
+          button remove
+      .summary_content
+        p Genre
+        p #{b.description}
+        
