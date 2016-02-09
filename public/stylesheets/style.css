@@ -1,6 +1,40 @@
+html,
+body,
+ul,
+ol {
+  margin: 0;
+  padding: 0; }
+
+#header {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  margin-bottom: 10px; }
+  #header * {
+    margin-top: auto;
+    margin-bottom: auto; }
+  #header h1 {
+    margin-left: 0.5em; }
+
+.monster {
+  width: 50%;
+  padding-top: 20px;
+  margin: auto;
+  border: 1px solid black; }
+
+html {
+  box-sizing: border-box; }
+
 body {
-  padding: 50px;
+  padding: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+#main {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  border: 1px solid black;
+  text-align: center; }
 
 a {
   color: #00B7FF; }
