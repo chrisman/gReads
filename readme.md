@@ -25,3 +25,7 @@ Galvanize Reads is a book catalog service that stores a list of recommended tech
 * [pivotal tracker](https://www.pivotaltracker.com/n/projects/1532697)
 
 * [deployed on heroku](https://g18reads.herokuapp.com)
+
+## data model
+
+![data model](data_model.png)
