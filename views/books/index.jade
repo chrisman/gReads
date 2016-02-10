@@ -1,6 +1,8 @@
 extends ../contentlayout
 
 block page_content
+  .add_book
+    a(href='/books/new') Add a book
   for b in books
     .book_summary
       .thumbnail

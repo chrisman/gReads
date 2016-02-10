@@ -22,6 +22,10 @@ ol {
   margin: auto;
   border: 1px solid black; }
 
+.error {
+  font-weight: bold;
+  color: #f00; }
+
 html {
   box-sizing: border-box; }
 
