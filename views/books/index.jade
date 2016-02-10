@@ -1,23 +1,25 @@
 extends ../contentlayout
 
 block page_content
-  .add_book
+  .options
     a(href='/books/new') Add a book
   for b in books
     .book_summary
       .thumbnail
-        img(src='#{b.cover_url}' height='100')
-      .summary_header
-        .title_info
-          h3 #{b.title}
-          p By #{b.first_name} #{b.last_name}
-        .buttons
-          a(href='/books/#{b.book_id}/edit')
-            button edit
-          a(href='/books/#{b.book_id}/delete')
-            button remove
-      .summary_content
-        p Genre
-        p #{b.description}
-      if include_delete
-        include ../includes/delete
+        img(src='#{b.cover_url}' height='250' width='168')
+      .summary_body
+        .summary_header
+          .title_info
+            h3 
+              a(href='/books/#{b.book_id}') #{b.title}
+            p By #{b.first_name} #{b.last_name}
+          .buttons
+            a(href='/books/#{b.book_id}/edit')
+              button edit
+            a(href='/books/#{b.book_id}/delete')
+              button remove
+        .summary_content
+          p Genre
+          p #{b.description}
+        if include_delete
+          include ../includes/delete

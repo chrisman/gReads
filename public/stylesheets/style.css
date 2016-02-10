@@ -26,23 +26,48 @@ ol {
   font-weight: bold;
   color: #f00; }
 
-.nav {
-  margin-right: 100px; }
-  .nav ul {
-    list-style-type: none; }
-    .nav ul li {
-      border: 1px solid black;
-      padding: 25px;
-      padding-bottom: 50px; }
-      .nav ul li img {
-        margin-bottom: 25px;
-        border: 1px solid black; }
-      .nav ul li a {
-        text-decoration: none; }
-      .nav ul li p {
-        -o-transform: rotate(270deg);
-        transform: rotate(270deg);
-        font-size: larger; }
+.nav ul {
+  list-style-type: none; }
+  .nav ul li {
+    border: 1px solid black;
+    padding: 25px;
+    padding-bottom: 50px; }
+    .nav ul li img {
+      margin-bottom: 25px;
+      border: 1px solid black; }
+    .nav ul li a {
+      text-decoration: none; }
+    .nav ul li p {
+      -o-transform: rotate(270deg);
+      transform: rotate(270deg);
+      font-size: larger; }
+
+.container {
+  padding-right: 100px;
+  padding-left: 100px; }
+  .container .options {
+    padding: 10px;
+    text-align: right; }
+    .container .options a {
+      text-decoration: none; }
+
+.book_summary {
+  display: flex;
+  flex-flow: row nowrap;
+  text-align: left;
+  margin-bottom: 25px; }
+  .book_summary .thumbnail img {
+    height: 250px;
+    border: 1px solid black; }
+  .book_summary .summary_body {
+    padding-left: 10px;
+    padding-right: 10px; }
+    .book_summary .summary_body .summary_header {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between; }
+    .book_summary .summary_body .title_info h3 {
+      margin: 0; }
 
 html {
   box-sizing: border-box; }
