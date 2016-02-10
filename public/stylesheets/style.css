@@ -5,6 +5,22 @@ ol {
   margin: 0;
   padding: 0; }
 
+html {
+  box-sizing: border-box; }
+
+body {
+  padding: 20px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+#main {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  text-align: center; }
+
+a {
+  color: #00B7FF; }
+
 #header {
   display: flex;
   flex-flow: row nowrap;
@@ -69,21 +85,14 @@ ol {
     .book_summary .summary_body .title_info h3 {
       margin: 0; }
 
-html {
-  box-sizing: border-box; }
-
-body {
-  padding: 20px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
-
-#main {
-  display: flex;
-  flex-flow: row nowrap;
-  width: 100%;
-  border: 1px solid black;
-  text-align: center; }
-
-a {
-  color: #00B7FF; }
+form {
+  text-align: left; }
+  form input, form select, form textarea {
+    width: 250px;
+    margin-bottom: 20px; }
+  form #author_id {
+    width: 150px; }
+  form label p {
+    margin: 0; }
 
 /*# sourceMappingURL=style.css.map */
