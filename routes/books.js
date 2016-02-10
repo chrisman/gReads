@@ -39,7 +39,6 @@ router.post('/', function(req, res, next) {
     book_obj.cover_url = req.body.cover_url;
 
     db.addBook(book_obj, function(result){
-      console.log(result);
       var record_obj = {};
       record_obj.book_id = result[0];
       record_obj.author_id = req.body.author_id;
@@ -67,7 +66,6 @@ router.get('/', function(req, res, next) {
 // list one book
 router.get('/:id', function(req, res, next) {
   db.getSingleBook(req.params.id, function(book){
-    console.log(book);
     res.render('books/index', {
       books: book
     });
