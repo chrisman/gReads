@@ -16,9 +16,8 @@ router.get('/new', function(req, res, next){
   });
 });
 router.post('/', function(req, res, next) {
-  var errors = book.has_errors(req.body);
   console.log(req.body);
-  console.log(errors);
+  var errors = book.has_errors(req.body);
 
   if (errors.length){
     db.getGenres(function(genres){
@@ -31,10 +30,20 @@ router.post('/', function(req, res, next) {
       });
     });
   } else { // no errors
-    db.addBook(req.body, function(result){
-      db.addRecord(req.body, function(result){
-        console.log(result);
-        res.render('/books');
+    var book_obj = {};
+    book_obj.title = req.body.title;
+    book_obj.genre_id = req.body.genre;
+    book_obj.description = req.body.description;
+    book_obj.cover_url = req.body.cover_url;
+
+    db.addBook(book_obj, function(result){
+      console.log(result);
+      var record_obj = {};
+      record_obj.book_id = result[0];
+      record_obj.author_id = req.body.author_id;
+
+      db.addRecord(record_obj, function(result){
+        res.redirect('/books');
       });
     });
   }
@@ -51,7 +60,11 @@ router.get('/', function(req, res, next) {
 
 // READ -- list one book //
 router.get('/:id', function(req, res, next) {
-  res.render('books/show', {});
+  db.getSingleBook(req.params.id, function(result){
+    res.render('books/index', {
+      books: result
+    });
+  });
 });
 
 // UPDATE -- edit a book //
@@ -64,10 +77,19 @@ router.post('/:id', function(req, res, next) {
 
 // DELETE -- remove a book //
 router.get('/:id/delete', function(req, res, next) {
-  res.send('delete fomr');
+  db.getSingleBook(req.params.id, function(result){
+    res.render('books/index', {
+      books: result,
+      include_delete: true
+    });
+  });
 });
 router.post('/:id/delete', function(req, res, next) {
-  res.send('book deleted');
+  db.deleteBook(req.params.id, function(result){
+    db.deleteRecords(req.params.id, function(result){
+      res.redirect('/books');
+    });
+  });
 });
 
 module.exports = router;

@@ -13,8 +13,10 @@ block page_content
           p By #{b.first_name} #{b.last_name}
         .buttons
           button edit
-          button remove
+          a(href='/books/#{b.book_id}/delete')
+            button remove
       .summary_content
         p Genre
         p #{b.description}
-        
+      if include_delete
+        include ../includes/delete
