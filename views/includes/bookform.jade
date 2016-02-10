@@ -13,7 +13,9 @@ label(for="description") Description
   p: textarea(placeholder="description" id="description" name="description")= (book)?book[0].description:undefined
 
 label(for="authors") Authors
-  select(name="author_id" id="author_id")
-    for a, i in authors
-      option(value='#{a.id}' selected=(book) ? book[0].author_id === (i + 1) ? true : undefined : undefined) #{a.first_name} #{a.last_name}
-  a(href='#') Add Author
+  p
+    select(name="author_id" id="author_id")
+      for a, i in authors
+        option(value='#{a.id}' selected=(book) ? book[0].author_id === (i + 1) ? true : undefined : undefined) #{a.first_name} #{a.last_name}
+    &nbsp;
+    a(href='#') Add Author

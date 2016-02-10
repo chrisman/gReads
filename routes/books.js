@@ -56,9 +56,14 @@ router.post('/', function(req, res, next) {
 
 // list all books
 router.get('/', function(req, res, next) {
-  db.getAllBooks(function(results){
+  db.getAllBooks(function(books){
+    books.forEach(function(b){
+      db.getAuthorSeries(b.authors, function(results){
+        b.authors = results;
+      });
+    });
     res.render('books/index', { 
-      books: results 
+      books: books 
     });
   });
 });
@@ -81,7 +86,7 @@ router.get('/:id/edit', function(req, res, next) {
   db.getGenres(function(genres){
     db.getAuthors(function(authors){
       db.getSingleBook(req.params.id, function(book){
-        res.render('books/edit',{
+        res.render('books/edit', {
           book: book,
           genres: genres,
           authors: authors

@@ -11,15 +11,15 @@ block page_content
         .summary_header
           .title_info
             h3 
-              a(href='/books/#{b.book_id}') #{b.title}
+              a(href='/books/#{b.id}') #{b.title}
             - myauthors = []
             each a in b.authors
               - myauthors.push(a.first_name + ' ' + a.last_name);
             p By #{myauthors.join(', ')}
           .buttons
-            a(href='/books/#{b.book_id}/edit')
+            a(href='/books/#{b.id}/edit')
               button edit
-            a(href='/books/#{b.book_id}/delete')
+            a(href='/books/#{b.id}/delete')
               button remove
         .summary_content
           p Genre
