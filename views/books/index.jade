@@ -12,7 +12,10 @@ block page_content
           .title_info
             h3 
               a(href='/books/#{b.book_id}') #{b.title}
-            p By #{b.first_name} #{b.last_name}
+            - myauthors = []
+            each a in b.authors
+              - myauthors.push(a.first_name + ' ' + a.last_name);
+            p By #{myauthors.join(', ')}
           .buttons
             a(href='/books/#{b.book_id}/edit')
               button edit

@@ -66,9 +66,10 @@ router.get('/', function(req, res, next) {
 
 // list one book
 router.get('/:id', function(req, res, next) {
-  db.getSingleBook(req.params.id, function(result){
+  db.getSingleBook(req.params.id, function(book){
+    console.log(book);
     res.render('books/index', {
-      books: result
+      books: book
     });
   });
 });
