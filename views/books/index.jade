@@ -12,7 +12,8 @@ block page_content
           h3 #{b.title}
           p By #{b.first_name} #{b.last_name}
         .buttons
-          button edit
+          a(href='/books/#{b.book_id}/edit')
+            button edit
           a(href='/books/#{b.book_id}/delete')
             button remove
       .summary_content

@@ -3,8 +3,11 @@ var router = express.Router();
 var db = require('../lib/db/books');
 var book = require('../lib/validate_book');
 
+////////////
+// CREATE //
+////////////
 
-// CREATE -- add a book //
+// add a book
 router.get('/new', function(req, res, next){
   db.getGenres(function(genres){
     db.getAuthors(function(authors){
@@ -16,7 +19,6 @@ router.get('/new', function(req, res, next){
   });
 });
 router.post('/', function(req, res, next) {
-  console.log(req.body);
   var errors = book.has_errors(req.body);
 
   if (errors.length){
@@ -49,7 +51,11 @@ router.post('/', function(req, res, next) {
   }
 });
 
-// READ -- list all books //
+//////////
+// READ //
+//////////
+
+// list all books
 router.get('/', function(req, res, next) {
   db.getAllBooks(function(results){
     res.render('books/index', { 
@@ -58,7 +64,7 @@ router.get('/', function(req, res, next) {
   });
 });
 
-// READ -- list one book //
+// list one book
 router.get('/:id', function(req, res, next) {
   db.getSingleBook(req.params.id, function(result){
     res.render('books/index', {
@@ -67,15 +73,71 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
-// UPDATE -- edit a book //
+////////////
+// UPDATE //
+////////////
+
+// get edit form
 router.get('/:id/edit', function(req, res, next) {
-  res.send('edit form');
-});
-router.post('/:id', function(req, res, next) {
-  res.send('book updates');
+  db.getGenres(function(genres){
+    db.getAuthors(function(authors){
+      db.getSingleBook(req.params.id, function(book){
+        res.render('books/edit',{
+          book: book,
+          genres: genres,
+          authors: authors
+        });
+      });
+    });
+  });
 });
 
-// DELETE -- remove a book //
+// post update
+router.post('/:id', function(req, res, next) {
+  var book_id = req.params.id;
+  var errors = book.has_errors(req.body);
+
+  // handle errors
+  if (errors.length){
+  db.getGenres(function(genres){
+    db.getAuthors(function(authors){
+      db.getSingleBook(book_id, function(book){
+        res.render('books/edit',{
+          errors: errors,
+          book: book,
+          genres: genres,
+          authors: authors
+        });
+      });
+    });
+  });
+
+  // no errors:
+  } else { 
+    var book_obj = {};
+    book_obj.id = book_id;
+    book_obj.title = req.body.title;
+    book_obj.genre_id = req.body.genre;
+    book_obj.description = req.body.description;
+    book_obj.cover_url = req.body.cover_url;
+
+    db.updateBook(book_obj, function(result){
+      var record_obj = {};
+      record_obj.book_id = book_id;
+      record_obj.author_id = req.body.author_id;
+
+      db.updateRecord(record_obj, function(result){
+        res.redirect('/books/' + book_id);
+      });
+    });
+  }
+});
+
+////////////
+// DELETE //
+////////////
+
+// remove a book
 router.get('/:id/delete', function(req, res, next) {
   db.getSingleBook(req.params.id, function(result){
     res.render('books/index', {

@@ -1,19 +1,19 @@
 label(for="title") Title
-  p: input(type="text" placeholder="title" id="title" name="title")
+  p: input(type="text" placeholder="title" id="title" name="title" value=(book)?book[0].title:undefined)
 
 label(for="genre") Genre
   p: select(id="genre" name="genre")
-    for g in genres
-      option(value='#{g.id}') #{g.genre}
+    each g, i in genres
+      option(value='#{g.id}' selected=(book) ? book[0].genre_id === (i + 1) ? true : undefined : undefined) #{g.genre}
 
 label(for="url") Cover Image URL
-  p: input(placeholder="http://www" id="url" name="cover_url")
+  p: input(placeholder="http://www" id="url" name="cover_url" value=(book)?book[0].cover_url:undefined)
 
 label(for="description") Description
-  p: textarea(placeholder="description" id="description" name="description")
+  p: textarea(placeholder="description" id="description" name="description")= (book)?book[0].description:undefined
 
 label(for="authors") Authors
   select(name="author_id" id="author_id")
-    for a in authors
-      option(value='#{a.id}') #{a.first_name} #{a.last_name}
+    for a, i in authors
+      option(value='#{a.id}' selected=(book) ? book[0].author_id === (i + 1) ? true : undefined : undefined) #{a.first_name} #{a.last_name}
   a(href='#') Add Author
