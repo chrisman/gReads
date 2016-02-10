@@ -36,7 +36,6 @@ router.post('/', function(req, res, next) {
 router.get('/', function(req, res, next) {
   db.getAllBooks(function(results){
     res.render('books/index', { 
-      title: 'READ A BOOK',
       books: results 
     });
   });
