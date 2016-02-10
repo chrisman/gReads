@@ -6,30 +6,38 @@ var book = require('../lib/validate_book');
 
 // CREATE -- add a book //
 router.get('/new', function(req, res, next){
+  db.getGenres(function(genres){
+    db.getAuthors(function(authors){
+      res.render('books/new',{
+        genres: genres,
+        authors: authors
+      });
+    });
+  });
+});
+router.post('/', function(req, res, next) {
   var errors = book.has_errors(req.body);
+  console.log(req.body);
+  console.log(errors);
 
   if (errors.length){
-    res.render('books/new', {
-      errors: errors
-    });
-  } else { // no errors
     db.getGenres(function(genres){
       db.getAuthors(function(authors){
-        res.render('books/new',{
+        res.render('books/new', {
+          errors: errors,
           genres: genres,
-          authors: authors
+          authors, authors
         });
       });
     });
-  }
-});
-router.post('/', function(req, res, next) {
-  db.addBook(req.body, function(result){
-    db.addRecord(req.body, function(result){
-      console.log(result);
-      res.render('/books');
+  } else { // no errors
+    db.addBook(req.body, function(result){
+      db.addRecord(req.body, function(result){
+        console.log(result);
+        res.render('/books');
+      });
     });
-  });
+  }
 });
 
 // READ -- list all books //
