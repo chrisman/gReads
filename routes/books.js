@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../lib/db/books');
+var random = require('../lib/db/random');
 var book = require('../lib/validate_book');
 
 ////////////
@@ -57,13 +58,14 @@ router.post('/', function(req, res, next) {
 // list all books
 router.get('/', function(req, res, next) {
   db.getAllBooks(function(books){
-    books.forEach(function(b){
-      db.getAuthorSeries(b.authors, function(results){
-        b.authors = results;
+    random.getBook(function(random_book){
+      random.getAuthor(function(random_author){
+        res.render('books/index', { 
+          books: books ,
+          random_book: random_book , 
+          random_author: random_author
+        });
       });
-    });
-    res.render('books/index', { 
-      books: books 
     });
   });
 });

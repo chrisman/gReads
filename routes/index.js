@@ -1,12 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var db = require('../lib/db/books');
+var random = require('../lib/db/random');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  db.getRandomBook(function(book){
-    res.render('index', {
-      book: book
+  random.getBook(function(book){
+    random.getAuthor(function(author){
+      res.render('index', {
+        book: book,
+        author: author
+      });
     });
   });
 });

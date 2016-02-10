@@ -1,0 +1,8 @@
+extends ../contentlayout
+
+block page_content
+  form(action="/books" method="POST")
+    include ../includes/errors
+    include ../includes/bookform
+    p
+      input(type="submit" value="ADD BOOK")

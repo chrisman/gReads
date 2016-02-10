@@ -37,6 +37,8 @@ a {
   padding-top: 20px;
   margin: auto;
   border: 1px solid black; }
+  .monster img {
+    border: 1px solid black; }
 
 .error {
   font-weight: bold;
