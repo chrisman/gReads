@@ -60,7 +60,6 @@ router.get('/', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
   db.getBooks(function(books){
     db.showAuthor(req.params.id, function(author){
-      console.log(author);
       res.render('authors/show', {
         authors: author,
         books: books,
@@ -79,7 +78,6 @@ router.get('/:id', function(req, res, next) {
 router.get('/:id/edit', function(req, res, next) {
   db.getBooks(function(books){
     db.showAuthor(req.params.id, function(author){
-      console.log(author);
       res.render('authors/edit', {
         author: author[0],
         books: books,
@@ -128,7 +126,6 @@ router.post('/:id', function(req, res, next) {
 // get delete confirmation
 router.get('/:id/delete', function(req, res, next) {
   db.showAuthor(req.params.id, function(author){
-    console.log(author);
     res.render('authors/show', {
       authors: author,
       include_delete: true,
