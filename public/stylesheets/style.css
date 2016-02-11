@@ -40,9 +40,11 @@ a {
   .monster img {
     border: 1px solid black; }
 
-.error {
-  font-weight: bold;
-  color: #f00; }
+.errors {
+  margin-bottom: 20px; }
+  .errors .error {
+    font-weight: bold;
+    color: #f00; }
 
 .nav ul {
   list-style-type: none; }
@@ -92,7 +94,7 @@ form {
   form input, form select, form textarea {
     width: 250px;
     margin-bottom: 20px; }
-  form #author_id {
+  form #author_id, form #book_id {
     width: 150px; }
   form label p {
     margin: 0; }

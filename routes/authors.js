@@ -9,10 +9,27 @@ var author = require('../lib/validate_author');
 
 // add an author
 router.get('/new', function(req, res, next){
-  res.send('new author form');
+  db.getBooks(function(books){
+    res.render('authors/new', {
+      books: books
+    });
+  });
 });
 router.post('/', function(req, res, next) {
-  res.send('new auuthor created');
+  var errors = author.has_errors(req.body);
+
+  if (errors.length) {
+    db.getBooks(function(books){
+      res.render('authors/new', {
+        errors: errors , 
+        books: books
+      });
+    });
+  } else {
+    db.newAuthor(req.body, function(r){
+      res.redirect('/authors');
+    });
+  }
 });
 
 //////////
