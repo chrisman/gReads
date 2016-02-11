@@ -1,9 +1,27 @@
+//- localStroage images are set randomly in  /views/index.jade
 ul
   li
     a(href="/authors")
-      img(src="https://placebear.com/75/75" width="75" height="75")
+      img(
+        id="nav_thumb_author",
+        width="75", 
+        height="75")
       p Authors
   li
     a(href="/books")
-      img(src="https://placebear.com/75/75" width="75" height="75")
+      img(
+        id="nav_thumb_book",
+        width="75"
+        height="75")
       p Books
+
+script.
+  var author_url = localStorage.getItem('nav_thumb_author');
+  var book_url = localStorage.getItem('nav_thumb_book')
+  var bear_url = 'https://placebear.com/75/75';
+
+  author_url = (author_url.length) ? author_url : bear_url;
+  book_url = (book_url.length) ? book_url : bear_url;
+
+  document.getElementById('nav_thumb_author').src=author_url;
+  document.getElementById('nav_thumb_book').src=book_url;

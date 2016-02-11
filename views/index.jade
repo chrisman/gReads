@@ -11,7 +11,7 @@ block content
         img(src='#{book.cover_url}' width='400' height='300')
         p Books
 
+  //- see /views/includes/nav.jade
   script.
     localStorage.setItem( 'nav_thumb_book', '!{book.cover_url}' );
     localStorage.setItem( 'nav_thumb_author', '!{author.portrait_url}' );
-    
