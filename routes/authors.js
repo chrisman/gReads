@@ -46,7 +46,6 @@ router.post('/', function(req, res, next) {
 // list all authors
 router.get('/', function(req, res, next) {
   db.getAuthors(function(authors){
-    console.log(authors);
     res.render('authors/show',{
       authors: authors,
       include_delete: false,
@@ -57,7 +56,17 @@ router.get('/', function(req, res, next) {
 
 // list one author
 router.get('/:id', function(req, res, next) {
-  res.send('just one authos');
+  db.getBooks(function(books){
+    db.showAuthor(req.params.id, function(author){
+      console.log(author);
+      res.render('authors/show', {
+        authors: author,
+        books: books,
+        include_delete: false,
+        include_options: false
+      });
+    });
+  });
 });
 
 ////////////
