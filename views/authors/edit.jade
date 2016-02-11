@@ -1,8 +1,8 @@
 extends ../contentlayout
 
 block page_content
-  form(action="/books/#{book[0].book_id}" method="POST")
+  form(action="/authors/#{author.id}" method="POST")
     include ../includes/errors
-    include ../includes/bookform
+    include ../includes/authorform
     p
-      input(type="submit" value="EDIT BOOK")
+      input(type="submit" value="EDIT AUTHOR")

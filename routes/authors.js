@@ -26,11 +26,13 @@ router.post('/', function(req, res, next) {
       });
     });
   } else {
+
     var author_obj = {};
     author_obj.first_name = req.body.first_name;
     author_obj.last_name = req.body.last_name;
     author_obj.portrait_url = req.body.portrait_url;
     author_obj.biography = req.body.biography;
+
     db.newAuthor(author_obj, function(r){
       res.redirect('/authors');
     });
@@ -64,12 +66,48 @@ router.get('/:id', function(req, res, next) {
 
 // get edit form
 router.get('/:id/edit', function(req, res, next) {
-  res.send('edit form!');
+  db.getBooks(function(books){
+    db.showAuthor(req.params.id, function(author){
+      console.log(author);
+      res.render('authors/edit', {
+        author: author[0],
+        books: books,
+        include_delete: false,
+        include_options: false
+      });
+    });
+  });
 });
 
 // post update
 router.post('/:id', function(req, res, next) {
-  res.send('updates!');
+  var errors = author.has_errors(req.body);
+
+  if (errors.length) {
+    db.getBooks(function(books){
+      db.showAuthor(req.params.id, function(author){
+        res.render('authors/edit', {
+          errors: errors,
+          author: author[0],
+          books: books,
+          include_delete: false,
+          include_options: false
+        });
+      });
+    });
+  } else {
+
+    var author_obj = {};
+    author_obj.id = req.params.id;
+    author_obj.first_name = req.body.first_name;
+    author_obj.last_name = req.body.last_name;
+    author_obj.portrait_url = req.body.portrait_url;
+    author_obj.biography = req.body.biography;
+
+    db.updateAuthor(author_obj, function(r){
+      res.redirect('/authors/' + req.params.id);
+    });
+  }
 });
 
 ////////////

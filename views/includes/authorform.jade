@@ -1,19 +1,19 @@
 label(for="first_name") First name
-  p: input(type="text" placeholder="first name" id="first_name" name="first_name" value=(author)?author[0].first_name:undefined)
+  p: input(type="text" placeholder="first name" id="first_name" name="first_name" value=(author)?author.first_name:undefined)
 
 label(for="last_name") Last name
-  p: input(type="text" placeholder="last name" id="last_name" name="last_name" value=(author)?author[0].last_name:undefined)
+  p: input(type="text" placeholder="last name" id="last_name" name="last_name" value=(author)?author.last_name:undefined)
 
 label(for="url") Portrait URL
-  p: input(placeholder="http://www" id="url" name="portrait_url" value=(author)?author[0].portrait_url:undefined)
+  p: input(placeholder="http://www" id="url" name="portrait_url" value=(author)?author.portrait_url:undefined)
 
 label(for="biography") Biography
-  p: textarea(placeholder="biography" id="biography" name="biography")= (author)?author[0].biography:undefined
+  p: textarea(placeholder="biography" id="biography" name="biography")= (author)?author.biography:undefined
 
 label(for="books") Books
   p
     select(name="book_id" id="book_id")
       for b, i in books
-        option(value='#{b.id}' selected=(author) ? author[0].book_id === (i + 1) ? true : undefined : undefined) #{b.title} 
+        option(value='#{b.id}' selected=(author) ? author.book_id === (i + 1) ? true : undefined : undefined) #{b.title} 
     &nbsp;
     a(href='#') Add Book
