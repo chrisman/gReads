@@ -48,6 +48,7 @@ router.post('/', function(req, res, next) {
 // list all authors
 router.get('/', function(req, res, next) {
   db.getAuthors(function(authors){
+    console.log(authors);
     res.render('authors/show',{
       authors: authors,
       include_delete: false,
