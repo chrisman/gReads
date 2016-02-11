@@ -99,4 +99,17 @@ form {
   form label p {
     margin: 0; }
 
+.btn-dngr {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+  background-color: #f00;
+  border-radius: 5px;
+  border: 0px solid #000;
+  font-size: larger;
+  font-weight: bolder; }
+  .btn-dngr :hover {
+    border: 1px solid #fff; }
+
 /*# sourceMappingURL=style.css.map */
