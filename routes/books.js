@@ -60,7 +60,6 @@ router.get('/', function(req, res, next) {
   db.getAllBooks(function(books){
     random.getBook(function(random_book){
       random.getAuthor(function(random_author){
-        console.log(books);
         res.render('books/index', { 
           books: books ,
           random_book: random_book , 
