@@ -1,8 +1,8 @@
 extends ../contentlayout
 
 block page_content
-  .options
-    a(href='/books/new') Add a book
+  if include_options
+    include ../includes/options_books
   for b in books
     .book_summary
       .thumbnail
@@ -11,18 +11,16 @@ block page_content
         .summary_header
           .title_info
             h3 
-              a(href='/books/#{b.id}') #{b.title}
-            - myauthors = []
-            each a in b.authors
-              - myauthors.push(a.first_name + ' ' + a.last_name);
-            p By #{myauthors.join(', ')}
+              a(href='/books/#{b.book_id}') #{b.title}
+            p By 
+              a(href='/authors/#{b.author_id}') #{b.first_name} #{b.last_name}
           .buttons
-            a(href='/books/#{b.id}/edit')
+            a(href='/books/#{b.book_id}/edit')
               button edit
-            a(href='/books/#{b.id}/delete')
+            a(href='/books/#{b.book_id}/delete')
               button remove
         .summary_content
-          p Genre
+          p #{b.genre}
           p #{b.description}
         if include_delete
           include ../includes/delete
