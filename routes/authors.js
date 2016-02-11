@@ -26,7 +26,12 @@ router.post('/', function(req, res, next) {
       });
     });
   } else {
-    db.newAuthor(req.body, function(r){
+    var author_obj = {};
+    author_obj.first_name = req.body.first_name;
+    author_obj.last_name = req.body.last_name;
+    author_obj.portrait_url = req.body.portrait_url;
+    author_obj.biography = req.body.biography;
+    db.newAuthor(author_obj, function(r){
       res.redirect('/authors');
     });
   }
@@ -38,9 +43,12 @@ router.post('/', function(req, res, next) {
 
 // list all authors
 router.get('/', function(req, res, next) {
-  db.getAllAuthors(function(authors){
+  db.getAuthors(function(authors){
+    console.log(authors);
     res.render('authors/show',{
-      authors: authors
+      authors: authors,
+      include_delete: false,
+      include_options: true
     });
   });
 });
@@ -68,12 +76,24 @@ router.post('/:id', function(req, res, next) {
 // DELETE //
 ////////////
 
-// remove a author
+// get delete confirmation
 router.get('/:id/delete', function(req, res, next) {
-  res.send('sure you wanna delete?');
+  db.showAuthor(req.params.id, function(author){
+    console.log(author);
+    res.render('authors/show', {
+      authors: author,
+      include_delete: true,
+      include_options: false
+    });
+  });
 });
+// post delete request
 router.post('/:id/delete', function(req, res, next) {
-  res.send('bah leeted');
+  db.destoryAuthor(req.params.id, function(result){
+    db.destroyRecords(req.params.id, function(result){
+      res.redirect('/authors');
+    });
+  });
 });
 
 module.exports = router;

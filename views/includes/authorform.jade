@@ -7,8 +7,8 @@ label(for="last_name") Last name
 label(for="url") Portrait URL
   p: input(placeholder="http://www" id="url" name="portrait_url" value=(author)?author[0].portrait_url:undefined)
 
-label(for="description") Biography
-  p: textarea(placeholder="description" id="description" name="description")= (author)?author[0].description:undefined
+label(for="biography") Biography
+  p: textarea(placeholder="biography" id="biography" name="biography")= (author)?author[0].biography:undefined
 
 label(for="books") Books
   p

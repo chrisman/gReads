@@ -1,8 +1,8 @@
 extends ../contentlayout
 
 block page_content
-  .options
-    a(href='/authors/new') Add a author
+  if include_options
+    include ../includes/options_author
   for a in authors
     .book_summary
       .thumbnail
@@ -20,4 +20,4 @@ block page_content
         .summary_content
           p #{a.biography}
         if include_delete
-          include ../includes/delete
+          include ../includes/delete_author
