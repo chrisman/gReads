@@ -7,7 +7,7 @@ var author = require('../lib/validate_author');
 // CREATE //
 ////////////
 
-// add an author
+// get add form
 router.get('/new', function(req, res, next){
   db.getBooks(function(books){
     res.render('authors/new', {
@@ -15,6 +15,8 @@ router.get('/new', function(req, res, next){
     });
   });
 });
+
+// post new author
 router.post('/', function(req, res, next) {
   var errors = author.has_errors(req.body);
 

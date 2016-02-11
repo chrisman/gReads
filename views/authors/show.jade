@@ -11,13 +11,17 @@ block page_content
         .summary_header
           .title_info
             h3 
-              a(href='/authors/#{a.id}') #{a.first_name} #{a.last_name}
+              a(href='/authors/#{a.author_id}') #{a.first_name} #{a.last_name}
           .buttons
-            a(href='/authors/#{a.id}/edit')
+            a(href='/authors/#{a.author_id}/edit')
               button edit
-            a(href='/authors/#{a.id}/delete')
+            a(href='/authors/#{a.author_id}/delete')
               button remove
         .summary_content
           p #{a.biography}
+        h3 Books
+        .summary_bibliography
+          li
+            a(href='/books/#{a.book_id}') #{a.title}
         if include_delete
           include ../includes/delete_author
